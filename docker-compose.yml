@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  app:
+    image: your-app-image
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./app:/app
+    environment:
+      - SOME_ENV_VAR=value
