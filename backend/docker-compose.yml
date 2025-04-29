@@ -5,19 +5,19 @@ services:
     build:
       context: ./backend
     ports:
-      - "8081:8080"  # Change to a different host port if 8081 is in use
+      - "8081:8080"  # Change to a different host port like 8081
     env_file:
-      - ./backend/.env  # Ensure this file exists
+      - ./backend/.env
     restart: unless-stopped
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile  # Ensure Dockerfile exists in the ./frontend directory
+      dockerfile: Dockerfile
     ports:
-      - "5173:5173"  # Ensure the port matches the one your frontend app is using
+      - "5173:5173"
     env_file:
-      - ./frontend/.env.docker  # Ensure this file exists and is correctly named
+      - ./frontend/.env.docker
     depends_on:
       - backend
     restart: unless-stopped
