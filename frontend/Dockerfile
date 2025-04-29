@@ -22,10 +22,10 @@ WORKDIR /app
 # Copy built assets and dependencies from frontend-builder stage
 COPY --from=frontend-builder /app .
 
-# Copy the .env.docker file to .env.local
+# Copy the .env.docker file to .env.local (must exist in frontend root)
 COPY .env.docker .env.local
 
-# Expose the frontend port (adjust if needed)
+# Expose the frontend port (Vite default is 5173)
 EXPOSE 5173
 
 # Start the frontend application
