@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package.json and package-lock.json for dependency installation
 COPY package*.json ./
 
-# Install dependencies (ignore peer deps issues)
-RUN npm install --legacy-peer-deps
+# Install dependencies (skip peer dependency errors + ignore lifecycle scripts)
+RUN npm install --legacy-peer-deps --ignore-scripts
 
 # Copy the rest of the application code
 COPY . .
@@ -22,11 +22,8 @@ WORKDIR /app
 # Copy built assets and dependencies from frontend-builder stage
 COPY --from=frontend-builder /app .
 
-# Copy the .env.docker file to .env.local (optional if you have environment variables)
+# Copy the .env.docker file to .env.local
 COPY .env.docker .env.local
-
-# Install production dependencies only (optional, if your app needs)
-# RUN npm ci --only=production
 
 # Expose the frontend port (adjust if needed)
 EXPOSE 5173
